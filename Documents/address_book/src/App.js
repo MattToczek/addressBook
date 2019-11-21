@@ -11,7 +11,7 @@ export default class App extends Component {
   state={
     name: '',
     number: '',
-    deets: '',
+    deets: []
   }
 
   addName = (event) => {
@@ -26,15 +26,17 @@ export default class App extends Component {
     })
   }
 
-  showDeets = () => {
+  setDeets = () => {
     this.setState({
-        deets: `Name: ${this.state.name}, No.: ${this.state.number}`
+        deets: [...this.deets, `Name: ${this.state.name}, No.: ${this.state.number}`]
     })
-
-
   }
   
-  
+  showDeets = () => {
+    this.state.deets.forEach(element => { 
+      return React.createElement(<li>{element}</li>);
+    });
+  }
 
   render() {
    
@@ -45,8 +47,8 @@ export default class App extends Component {
       <div>
         <InputNew onChange= {this.addName.bind(this)} value = {this.state.name} type = "text" classDec="nameBox inputBox" placeholder = "Please enter a name"/>
         <InputNew onChange= {this.addNum.bind(this)} value = {this.state.number} type = "number" classDec="numBox inputBox" placeholder = "Please enter a number"/>
-        <Btn onClick = {this.showDeets} classDec = "addBtn"/>
-        <List display ={this.state.deets}/>
+        <Btn onClick = {this.setDeets} classDec = "addBtn"/>
+        <List display ={this.showDeets} />
       </div>
     )
   }
