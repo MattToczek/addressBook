@@ -1,0 +1,54 @@
+
+.addBtn, 
+.listCont li,
+.inputBox {
+  height: 20px;
+  
+}
+
+.addBtn, 
+.listCont,
+.inputBox {
+border: 1px solid darkgray;
+}
+
+.inputBox,
+.listCont {
+  margin-top: 1rem;
+  width: 60%;
+  margin-left: 20%;
+  border: 1px grey solid;
+  background-color: azure;
+
+}
+
+.listCont {
+  margin-top: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.listCont li {
+  border-top: 1px grey solid;
+  width: 100%;
+  margin:0;
+
+}
+
+.numBox {
+  width: 50%;
+  border-radius: 5px 0 0 5px ;
+}
+
+
+.addBtn {
+  width: 10%;
+  border-radius: 0 5px 5px 0;
+  height: 24px;
+  margin-top: 1rem;
+}
+
+.nameBox {
+  border-radius: 5px;
+}
+
