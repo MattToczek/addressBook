@@ -1,54 +1,101 @@
 import React, {Component} from 'react';
-import List from './Components/List'
-import InputNew from './Components/InputNew'
 import Btn from './Components/Btn'
+import Li from './Components/Li'
 import './App.css';
+import { logicalExpression } from '@babel/types';
+
+
 
 
 
 export default class App extends Component {
-
   state={
-    name: '',
-    number: '',
-    deets: []
-  }
+      name: '',
+      nameHolder: '',
+      number: '',
+      numberHolder: '',
+      deets: [],
+      lis: []
+    }
+  
 
   addName = (event) => {
     this.setState({
-      name: event.target.value
+      name: event.target.value,
     })
   }
 
   addNum = (event) => {
     this.setState({
-      number: event.target.value
+      number: event.target.value,
     })
   }
 
-  setDeets = () => {
+
+ set = (e) => {
+    e.preventDefault();
     this.setState({
-        deets: [...this.deets, `Name: ${this.state.name}, No.: ${this.state.number}`]
+        number: '',
+        name: '',  
+        deets: [...this.state.deets, `Name: ${this.state.name} ---- No.: ${this.state.number}` ],
+        // lis: [...this.state.deets, `Name: ${this.state.name}, No.: ${this.state.number}`],
+ 
     })
+  }
+
+  setDeets = async(e) => {
+    await this.set(e);
+    // console.log(this.state.lis);
   }
   
-  showDeets = () => {
-    this.state.deets.forEach(element => { 
-      return React.createElement(<li>{element}</li>);
-    });
-  }
+  
+  
+
 
   render() {
-   
-    console.log (this.state.deets)
-    console.log (this.state.name)
+
+    // const myArray = this.state.deets.map( (element, index) => { 
+    //   console.log ("Deets is currently: " +this.state.deets)
+    //   return <li key={index}>{element}</li>
+    // })
+    const lis = [];
+
+    const remove = (i)=> {
+        let li = document.getElementById(`number${i}`);
+        li.style.display = 'none';
+    }
+    
+    const showDeets = this.state.deets.map( (element, index) => { 
+          // console.log ("Element is currently: " + "||" + element + "||")
+
+          // return <li key={index+1}>{element}<button onClick = {remove(index)}>Remove</button></li>
+          
+            lis.push(<li id={`number${index}`} key={index+1}>{element}<button className="" onClick = {() => remove(index)}>Remove</button></li>)
+
+          
+        });
+    
+      
+    
+    
+
+    console.log ("Deets is currently: ----")
+    console.log(this.state.deets);
+    console.log ("name is currently: " +this.state.name)
+    console.log ("name is currently: " +this.state.number)
 
     return (
+
+
       <div>
-        <InputNew onChange= {this.addName.bind(this)} value = {this.state.name} type = "text" classDec="nameBox inputBox" placeholder = "Please enter a name"/>
-        <InputNew onChange= {this.addNum.bind(this)} value = {this.state.number} type = "number" classDec="numBox inputBox" placeholder = "Please enter a number"/>
+        <input onChange= {this.addName} value = {this.state.name} type = "text" className="nameBox inputBox" placeholder = "Please enter a name"/>
+        <input onChange= {this.addNum} value = {this.state.number} type = "number" className="numBox inputBox" placeholder = "Please enter a number"/>
         <Btn onClick = {this.setDeets} classDec = "addBtn"/>
-        <List display ={this.showDeets} />
+        <ul className="listCont">
+          {/* {showDeets} */}
+          {lis}
+        </ul>
+
       </div>
     )
   }
